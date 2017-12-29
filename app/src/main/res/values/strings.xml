@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">PMIX</string>
+    <string name="login">Login</string>
+    <string name="stock_take">Input Stock Take Data</string>
+    <string name="view_data">View Stock Take Data</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="result">Result</string>
+    <string name="save">Save</string>
+    <string name="action_export">Export CVS</string>
+    <string name="select_scanner">Scanner:</string>
+    <string name="select_trigger_type">Trigger Type:</string>
+    <string name="ean8">EAN8</string>
+    <string name="code39">Code39</string>
+    <string name="code128">Code128</string>
+    <string name="set_decoders">Decoders:</string>
+    <string name="ean13">EAN13</string>
+    <string name="status">Status:</string>
+    <string name="scan">Scan:</string>
+    <string name="start">Start</string>
+    <string name="continuous">Continuous</string>
+    <string name="stop">Stop</string>
+    <string name="data">Data:</string>
+    <string name="barcode">Barcode</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="userID">User Id</string>
+    <string name="export">Export</string>
+    <string name="todo">To Do</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_remove_all">Remove all</string>
+    <string name="view_bale_count">View Bale Count</string>
+    <string name="location">Location</string>
+    <string name="quantity">Quantity</string>
+    <string name="input_bale_count">Input Bale Count</string>
+</resources>
