@@ -1,5 +1,6 @@
 package com.prestige.kaelmok.pmix;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.prestige.kaelmok.pmix.data.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BaleCount extends AppCompatActivity {
 
@@ -43,9 +47,16 @@ public class BaleCount extends AppCompatActivity {
         }else if(!mbaleQuantity.getText().toString().trim().matches(regexStr)){
             Toast.makeText(this,"Quantity entered not numberic",Toast.LENGTH_SHORT).show();
         }else{
-            // Add guest info to mDb
+            // Add info to mDb
             try {
-                addNewGuest(mbaleLocation.getText().toString(), mbaleQuantity.getText().toString(), userId);
+
+                Date cDate = new Date();
+                @SuppressLint("SimpleDateFormat")
+                String date = new SimpleDateFormat("yyyyMMdd").format(cDate);
+                @SuppressLint("SimpleDateFormat")
+                String time = new SimpleDateFormat("HHmmss").format(cDate);
+
+                addNewGuest(mbaleLocation.getText().toString(), mbaleQuantity.getText().toString(), date, time, userId);
                 Toast.makeText(this,"Input Succeeded",Toast.LENGTH_SHORT).show();
             } catch (Exception e){
                 Toast.makeText(this,"Input Failed",Toast.LENGTH_SHORT).show();
@@ -53,18 +64,15 @@ public class BaleCount extends AppCompatActivity {
         }
     }
 
-    private long addNewGuest(String location, String bale_Quantity, int userId) {
+    private long addNewGuest(String location, String bale_Quantity, String date, String time, int userId) {
         // Create a ContentValues instance to pass the values onto the insert query
         ContentValues cv = new ContentValues();
-        // Call put to insert the name value with the key COLUMN_GUEST_NAME
         cv.put(PmixContracts.BaleCountEntry.COLUMN_LOCATION, location);
-        // Call put to insert the party size value with the key COLUMN_PARTY_SIZE
         cv.put(PmixContracts.BaleCountEntry.COLUMN_BALE_QUANTITY, bale_Quantity);
-
+        cv.put(PmixContracts.BaleCountEntry.COLUMN_DATE, date);
+        cv.put(PmixContracts.BaleCountEntry.COLUMN_TIME, time);
         cv.put(PmixContracts.BaleCountEntry.COLUMN_USER_ID, userId);
-        // Call insert to run an insert query on TABLE_NAME with the ContentValues created
         return mDb.insert(PmixContracts.BaleCountEntry.BALE_COUNT_TABLE, null, cv);
     }
-
 
 }

@@ -163,15 +163,22 @@ public class ViewStockTakeList extends AppCompatActivity{
                 CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
                 SQLiteDatabase db = dbhelper.getReadableDatabase();
                 Cursor curCSV = db.rawQuery("SELECT * FROM stocktakelist", null);
-                csvWrite.writeNext(curCSV.getColumnNames());
+                String arrStrColumn[] = {curCSV.getColumnName(1), curCSV.getColumnName(2), curCSV.getColumnName(3)
+                        , curCSV.getColumnName(4)};
+                csvWrite.writeNext(arrStrColumn);
+
                 while (curCSV.moveToNext()) {
                     //Which column you want to exprort
-                    String arrStr[] = {curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)};
+                    String arrStr[] = {curCSV.getString(1), curCSV.getString(2), curCSV.getString(3)
+                            , curCSV.getString(4)};
+
                     csvWrite.writeNext(arrStr);
                 }
+
                 Toast.makeText(this,"Export Succeeded",Toast.LENGTH_SHORT).show();
                 csvWrite.close();
                 curCSV.close();
+
             } catch (Exception sqlEx) {
                 Toast.makeText(this,"Export Failed",Toast.LENGTH_SHORT).show();
             }

@@ -11,7 +11,7 @@ public class PmixDbHelper extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "stocktakelist.db";
     // If you change the database schema, you must increment the database version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // Constructor
     public PmixDbHelper(Context context) {
@@ -24,6 +24,8 @@ public class PmixDbHelper extends SQLiteOpenHelper{
         final String SQL_CREATE_STOCKTAKELIST_TABLE = "CREATE TABLE " + StockTakeEntry.TABLE_NAME + " (" +
                 StockTakeEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 StockTakeEntry.COLUMN_BARCODE + " TEXT NOT NULL UNIQUE, " +
+                StockTakeEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
+                StockTakeEntry.COLUMN_TIME + " INTEGER NOT NULL, " +
                 StockTakeEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 StockTakeEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 "); ";
@@ -33,6 +35,8 @@ public class PmixDbHelper extends SQLiteOpenHelper{
                 BaleCountEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 BaleCountEntry.COLUMN_LOCATION + " TEXT NOT NULL, " +
                 BaleCountEntry.COLUMN_BALE_QUANTITY + " INTEGER NOT NULL, " +
+                BaleCountEntry.COLUMN_DATE + " INTEGER NOT NULL, " +
+                BaleCountEntry.COLUMN_TIME + " INTEGER NOT NULL, " +
                 BaleCountEntry.COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 BaleCountEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 "); ";

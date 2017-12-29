@@ -1,6 +1,8 @@
 package com.prestige.kaelmok.pmix;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -26,6 +28,7 @@ import com.symbol.emdk.barcode.Scanner.TriggerType;
 import com.symbol.emdk.barcode.StatusData.ScannerStates;
 import com.symbol.emdk.barcode.StatusData;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -735,16 +738,24 @@ public class StockTake extends Activity implements EMDKListener, DataListener,
         if (textViewData.getText().length() == 0 ) {
             return;
         }
+
+        Date cDate = new Date();
+        @SuppressLint("SimpleDateFormat")
+        String date = new SimpleDateFormat("yyyyMMdd").format(cDate);
+        @SuppressLint("SimpleDateFormat")
+        String time = new SimpleDateFormat("HHmmss").format(cDate);
         //Dummy user id
         int userId = 1007;
 
         // Add stock info to mDb
-        addNewStock(textViewData.getText().toString(), userId);
+        addNewStock(textViewData.getText().toString(), date, time, userId);
     }
 
-    private long addNewStock(String barcode, int userId) {
+    private long addNewStock(String barcode, String date, String time, int userId) {
         ContentValues cv = new ContentValues();
         cv.put(PmixContracts.StockTakeEntry.COLUMN_BARCODE, barcode);
+        cv.put(PmixContracts.StockTakeEntry.COLUMN_DATE, date);
+        cv.put(PmixContracts.StockTakeEntry.COLUMN_TIME, time);
         cv.put(PmixContracts.StockTakeEntry.COLUMN_USER_ID, userId);
         return mDb.insert(PmixContracts.StockTakeEntry.TABLE_NAME, null, cv);
     }
